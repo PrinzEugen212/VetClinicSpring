@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление</title>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+          crossorigin="anonymous">
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div th:replace="~{menu :: navigation}"></div>
+
+<div class="container pt-3 pb-5">
+    <h2>Добавление приёма</h2>
+    <hr/>
+
+    <h4 class="pb-4 pt-2">Введите оставшуюся информацию</h4>
+
+    <div class="mb-5">
+        <form action="#" th:action="@{/visit/create/chooseInfo}" th:object="${visit}" method="post">
+            <input th:field="*{totalCost}" type="number" hidden>
+            <input th:field="*{employee}" hidden>
+            <input th:field="*{helperEmployee}" hidden>
+            <input th:field="*{client}" hidden>
+            <input th:field="*{animal}" hidden>
+
+            <div class="row mb-3">
+                <label class="col-md-3 col-lg-2 col-form-label">Дата</label>
+                <div class="col-md-6 col-lg-4">
+                    <input class="form-control" th:field="*{date}" type="datetime-local">
+                </div>
+                <div class="form-text text-danger" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"/>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-md-3 col-lg-2 col-form-label">Диагноз</label>
+                <div class="col-md-6 col-lg-4">
+                    <textarea class="form-control" rows="10" th:field="*{diagnosis}"/>
+                </div>
+                <div class="form-text text-danger" th:if="${#fields.hasErrors('diagnosis')}"
+                     th:errors="*{diagnosis}"/>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-md-3 col-lg-2 col-form-label">Назначение</label>
+                <div class="col-md-6 col-lg-4">
+                    <textarea class="form-control" rows="10" th:field="*{assignment}"/>
+                </div>
+                <div class="form-text text-danger" th:if="${#fields.hasErrors('assignment')}"
+                     th:errors="*{assignment}"/>
+            </div>
+
+            <div class="row">
+                <div class="col-1 offset-4 offset-md-3 offset-lg-2">
+                    <button class="btn btn-primary" type="submit">Далее</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>
